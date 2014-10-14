@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reactive.Concurrency;
-using MapsW8.Base.Reactive;
 
 namespace Utilities.Reactive
 {

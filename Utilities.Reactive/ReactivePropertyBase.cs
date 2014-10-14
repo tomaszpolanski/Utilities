@@ -10,7 +10,7 @@ using System.Reactive.Subjects;
 using System.Threading.Tasks;
 using Utilities.Reactive;
 
-namespace MapsW8.Base.Reactive
+namespace Utilities.Reactive
 {
     internal class SingletonPropertyChangedEventArgs
     {

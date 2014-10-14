@@ -131,7 +131,10 @@ namespace Utilities.Reactive
         /// <summary>Push parameter to subscribers.</summary>
         void ICommand.Execute(object parameter)
         {
-            _trigger.OnNext((T) parameter);
+            if (_isCanExecute)
+            {
+                _trigger.OnNext((T) parameter);
+            }
         }
 
         /// <summary>
