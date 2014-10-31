@@ -42,12 +42,6 @@ namespace Utilities.Reactive
         {
         }
 
-        public ReactiveCommand(IObservable<bool> canExecuteSource, Action<object> action)
-            : base(canExecuteSource, UIDispatcherScheduler.Default, true, action)
-        {
-            
-        }
-
         /// <summary>Push null to subscribers.</summary>
         public void Execute()
         {
@@ -205,12 +199,6 @@ namespace Utilities.Reactive
             return new ReactiveCommand(canExecuteSource, scheduler, initialValue);
         }
 
-        public static ReactiveCommand ToReactiveCommand(this IObservable<bool> canExecuteSource, 
-            Action<object> action )
-        {
-            return new ReactiveCommand(canExecuteSource, action);
-        }
-
         /// <summary>
         /// CanExecuteChanged is called from canExecute sequence on UIDispatcherScheduler.
         /// </summary>
@@ -218,11 +206,6 @@ namespace Utilities.Reactive
             bool initialValue = true)
         {
             return new ReactiveCommand<T>(canExecuteSource, initialValue);
-        }
-
-        public static ReactiveCommand<T> ToReactiveCommand<T>(this IObservable<bool> canExecuteSource, Action<T> action)
-        {
-            return new ReactiveCommand<T>(canExecuteSource, action);
         }
 
         /// <summary>
