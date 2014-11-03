@@ -12,7 +12,7 @@ namespace Utilities.Reactive
         public T Value
         {
             get { return InternalValue; }
-            set { InternalValue = value; }
+            set { InternalValue = value; } 
         }
 
         object IReactiveProperty.Value
