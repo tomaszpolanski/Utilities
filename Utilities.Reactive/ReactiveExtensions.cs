@@ -50,9 +50,9 @@ namespace Utilities.Reactive
                 .StartWith(source.Count);
         }
 
-        public static IObservable<object> SelectNull<TSource>(this IObservable<TSource> source)
+        public static IObservable<Unit> SelectUnit<TSource>(this IObservable<TSource> source)
         {
-            return source.Select<TSource, object>(_ => null);
+            return source.Select(_ => Unit.Default);
         }
     }
 }
