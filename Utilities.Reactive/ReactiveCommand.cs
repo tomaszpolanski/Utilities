@@ -52,7 +52,6 @@ namespace Utilities.Reactive
     public class ReactiveCommand<T> : IObservable<T>, ICommand, IDisposable
     {
         private readonly IDisposable _canExecuteSubscription;
-        private readonly IDisposable _actionSubscription;
         private readonly IScheduler _scheduler;
         private readonly Subject<T> _trigger = new Subject<T>();
         private bool _isCanExecute;
@@ -82,11 +81,6 @@ namespace Utilities.Reactive
         {
         }
 
-        public ReactiveCommand(IObservable<bool> canExecuteSource, Action<T> action)
-            : this(canExecuteSource, UIDispatcherScheduler.Default, true, action)
-        {
-        }
-
         /// <summary>
         /// CanExecuteChanged is called from canExecute sequence on scheduler.
         /// </summary>
@@ -97,21 +91,15 @@ namespace Utilities.Reactive
             _canExecuteSubscription = canExecuteSource
                 .DistinctUntilChanged()
                 .ObserveOn(scheduler)
-                .Subscribe(b =>
+                .Subscribe(canExecute =>
                 {
-                    _isCanExecute = b;
+                    _isCanExecute = canExecute;
                     var handler = CanExecuteChanged;
-                    if (handler != null) handler(this, EventArgs.Empty);
+                    if (handler != null)
+                    {
+                        handler(this, EventArgs.Empty);
+                    }
                 });
-        }
-
-        public ReactiveCommand(IObservable<bool> canExecuteSource, IScheduler scheduler, bool initialValue, Action<T> action = null)
-            : this(canExecuteSource, scheduler, initialValue)
-        {
-            if (action != null)
-            {
-                _actionSubscription = _trigger.Subscribe(action);
-            }
         }
 
         public event EventHandler CanExecuteChanged;
@@ -142,11 +130,6 @@ namespace Utilities.Reactive
             _trigger.OnCompleted();
             _trigger.Dispose();
             _canExecuteSubscription.Dispose();
-
-            if (_actionSubscription != null)
-            {
-                _actionSubscription.Dispose();
-            }
 
             if (_isCanExecute)
             {
