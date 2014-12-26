@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Utilities.Reactive</id>
+    <version>0.0.1</version>
+    <authors>Tomasz Polanski</authors>
+    <owners>Tomasz Polanski</owners>
+    <projectUrl>https://github.com/tomaszpolanski/Utilities</projectUrl>
+	<licenseUrl>http://opensource.org/licenses/MS-PL</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Small set of utilities for using Rx with C# properties</description>
+    <releaseNotes>Initial version</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="Rx-Core" version="2.2.5" />
+	  <dependency id="Rx-Interfaces" version="2.2.5" />
+	  <dependency id="Rx-Linq" version="2.2.5" />
+	  <dependency id="Rx-Main" version="2.2.5" />
+	  <dependency id="Rx-PlatformServices" version="2.2.5" />
+    </dependencies>
+  </metadata>
+</package>
