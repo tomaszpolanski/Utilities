@@ -8,5 +8,5 @@ This is modified light version of [ReactiveProperties](https://reactiveproperty.
 
 ## Example
 
-You can see how to use it in ReactivePropertis in [this blog](http://futurice.com/blog/reactive-c-number-in-practice). 
+You can see how to use it in ReactiveProperties in [this blog](http://futurice.com/blog/reactive-c-number-in-practice). 
 
