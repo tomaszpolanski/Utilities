@@ -45,5 +45,17 @@ namespace Utilities.Functional
         {
             return mValue;
         }
+
+        public override Option<T> Or(Func<Option<T>> selector)
+        {
+            return this;
+        }
+
+        public override Option<R> OfType<R>()
+        {
+            return mValue is R ? new Some<R>((R)(object)mValue) : Option<R>.None; 
+        }
+
+
     }
 }

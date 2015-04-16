@@ -49,5 +49,17 @@ namespace Utilities.Functional
         {
             return selector.Invoke();
         }
+
+        public override Option<T> Or(Func<Option<T>> selector)
+        {
+            return selector.Invoke();
+        }
+
+        public override Option<R> OfType<R>()
+        {
+            return Option<R>.None;
+        }
+
+
     }
 }

@@ -20,6 +20,10 @@ namespace Utilities.Functional
 
         public abstract T Or(Func<T> selector);
 
+        public abstract Option<T> Or(Func<Option<T>> selector);
+
+        public abstract Option<R> OfType<R>();
+
         public static Option<T> AsOption(T value)
         {
             return value != null ? new Some<T>(value) : None;

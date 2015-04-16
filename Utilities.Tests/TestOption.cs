@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using Utilities.Functional;
 
 namespace Utilities.Tests
@@ -171,6 +172,55 @@ namespace Utilities.Tests
                                        .Or(() => val);
 
             Assert.AreEqual(val, option);
+        }
+
+        [TestMethod]
+        public void TestOfTypeSomePositive()
+        {
+            var option = Option<string>.AsOption("Test")
+                                       .OfType<ICloneable>();
+
+            Assert.AreNotEqual(Option<ICloneable>.None, option);
+        }
+
+        [TestMethod]
+        public void TestOfTypeSomeNegative()
+        {
+            var option = Option<string>.AsOption("Test")
+                                       .OfType<int>();
+
+            Assert.AreEqual(Option<int>.None, option);
+        }
+
+        [TestMethod]
+        public void TestOfTypeNone()
+        {
+            var option = Option<string>.None
+                                       .OfType<ICloneable>();
+
+            Assert.AreEqual(Option<ICloneable>.None, option);
+        }
+
+        [TestMethod]
+        public void TestOrOptionSome()
+        {
+            var val = "Test";
+            var option = Option<string>.AsOption(val)
+                                       .Or(() => Option<string>.AsOption("Something"));
+
+            Assert.AreNotEqual(Option<ICloneable>.None, option);
+            Assert.AreEqual(val, option.Get());
+        }
+
+        [TestMethod]
+        public void TestOrOptionNone()
+        {
+            var val = "Test";
+            var option = Option<string>.None
+                                       .Or(() => Option<string>.AsOption(val));
+
+            Assert.AreNotEqual(Option<ICloneable>.None, option);
+            Assert.AreEqual(val, option.Get());
         }
     }
 }
