@@ -65,10 +65,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestOption.cs" />
     <Compile Include="TestReactiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Utilities.Functional\Utilities.Functional.csproj">
+      <Project>{456b70b4-18c2-4fe0-be55-f9b11c9df2dd}</Project>
+      <Name>Utilities.Functional</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities.Reactive\Utilities.Reactive.csproj">
       <Project>{5c6b624f-191d-40a7-ae78-7fb74f72400c}</Project>
       <Name>Utilities.Reactive</Name>
