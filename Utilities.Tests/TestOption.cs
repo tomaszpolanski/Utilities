@@ -29,40 +29,40 @@ namespace Utilities.Tests
         }
 
         [TestMethod]
-        public void TestMapSome()
+        public void TestSelectSome()
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                       .Map(str => str.Length);
+                                       .Select(str => str.Length);
 
             Assert.AreEqual(val.Length, option.Get());
         }
 
         [TestMethod]
-        public void TestMapNone()
+        public void TestSelectNone()
         {
             var option = Option<string>.AsOption(null)
-                                       .Map(str => str.Length);
+                                       .Select(str => str.Length);
 
             Assert.AreEqual(Option<int>.None, option);
         }
 
         [TestMethod]
-        public void TestBindSome()
+        public void TestSelectManySome()
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                       .Bind(str => Option<int>.AsOption(str.Length));
+                                       .SelectMany(str => Option<int>.AsOption(str.Length));
 
             Assert.AreEqual(val.Length, option.Get());
         }
 
         [TestMethod]
-        public void TestBindNone()
+        public void TestSelectManyNone()
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                       .Bind(str => Option<string>.AsOption(null));
+                                       .SelectMany(str => Option<string>.AsOption(null));
 
             Assert.AreEqual(Option<string>.None, option);
         }

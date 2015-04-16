@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utilities.Functional
 {
@@ -15,7 +11,7 @@ namespace Utilities.Functional
             mValue = value;
         }
 
-        public override Option<R> Bind<R>(Func<T, Option<R>> selector)
+        public override Option<R> SelectMany<R>(Func<T, Option<R>> selector)
         {
             return selector.Invoke(mValue);
         }
@@ -25,7 +21,7 @@ namespace Utilities.Functional
             return mValue;
         }
 
-        public override Option<R> Map<R>(Func<T, R> selector)
+        public override Option<R> Select<R>(Func<T, R> selector)
         {
             return new Some<R>(selector.Invoke(mValue));
         }
