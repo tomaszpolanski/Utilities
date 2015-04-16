@@ -16,9 +16,25 @@ namespace Utilities.Functional
 
         public abstract void Iter(Action<T> action);
 
+        public abstract R Match<R>(Func<T, R> some, Func<R> none);
+
+        public abstract T Or(Func<T> selector);
+
         public static Option<T> AsOption(T value)
         {
             return value != null ? new Some<T>(value) : None;
+        }
+
+        public static Option<T> Try(Func<T> selector)
+        {
+            try
+            {
+                return new Some<T>(selector.Invoke());
+            }
+            catch
+            {
+                return None;
+            }
         }
     }
 }

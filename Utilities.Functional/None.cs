@@ -39,5 +39,15 @@ namespace Utilities.Functional
         public override void Iter(Action<T> action)
         {
         }
+
+        public override R Match<R>(Func<T, R> some, Func<R> none)
+        {
+            return none.Invoke();
+        }
+
+        public override T Or(Func<T> selector)
+        {
+            return selector.Invoke();
+        }
     }
 }

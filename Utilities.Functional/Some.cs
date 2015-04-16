@@ -35,5 +35,15 @@ namespace Utilities.Functional
         {
             action.Invoke(mValue);
         }
+
+        public override R Match<R>(Func<T, R> some, Func<R> none)
+        {
+            return some.Invoke(mValue);
+        }
+
+        public override T Or(Func<T> selector)
+        {
+            return mValue;
+        }
     }
 }

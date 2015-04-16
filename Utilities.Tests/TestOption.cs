@@ -67,7 +67,7 @@ namespace Utilities.Tests
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                    .Where(str => str.StartsWith(val));
+                                       .Where(str => str.StartsWith(val));
 
             Assert.AreNotEqual(Option<string>.None, option);
             Assert.AreEqual(val, option.Get());
@@ -113,6 +113,64 @@ namespace Utilities.Tests
                           .Iter(i => valueToSet = "Test");
 
             Assert.AreEqual(val, valueToSet);
+        }
+
+        [TestMethod]
+        public void TestTrySome()
+        {
+            var number = 12;
+            var option = Option<int>.Try(() => int.Parse("" + number));
+
+            Assert.AreNotEqual(Option<string>.None, option);
+            Assert.AreEqual(number, option.Get());
+        }
+
+        [TestMethod]
+        public void TestTryNone()
+        {
+            var notNumber = "strange number";
+            var option = Option<int>.Try(() => int.Parse(notNumber));
+
+            Assert.AreEqual(Option<int>.None, option);
+        }
+
+        [TestMethod]
+        public void TestMatchSome()
+        {
+            var val = "Test";
+            var result = Option<string>.AsOption(val)
+                                       .Match(some => some, () => string.Empty);
+
+            Assert.AreEqual(val, result);
+        }
+
+        [TestMethod]
+        public void TestMatchNone()
+        {
+            var result = Option<string>.None
+                                       .Match(some => some, () => string.Empty);
+
+            Assert.AreEqual(string.Empty, result);
+        }
+
+        [TestMethod]
+        public void TestOrSome()
+        {
+            var val = "Test";
+            var option = Option<string>.AsOption(val)
+                                       .Or(() => "Something");
+
+            Assert.AreEqual(val, option);
+        }
+
+        [TestMethod]
+        public void TestOrNone()
+        {
+            var val = "Test";
+            var option = Option<string>.None
+                                       .Or(() => val);
+
+            Assert.AreEqual(val, option);
         }
     }
 }
