@@ -25,5 +25,15 @@ namespace Utilities.Functional
         {
             return new Some<R>(selector.Invoke(mValue));
         }
+
+        public override Option<T> Where(Func<T, bool> predicate)
+        {
+            return predicate.Invoke(mValue) ? this : None;
+        }
+
+        public override void Iter(Action<T> action)
+        {
+            action.Invoke(mValue);
+        }
     }
 }

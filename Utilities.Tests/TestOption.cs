@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Utilities.Reactive;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Utilities.Functional;
 
 namespace Utilities.Tests
@@ -41,7 +36,7 @@ namespace Utilities.Tests
         [TestMethod]
         public void TestSelectNone()
         {
-            var option = Option<string>.AsOption(null)
+            var option = Option<string>.None
                                        .Select(str => str.Length);
 
             Assert.AreEqual(Option<int>.None, option);
@@ -62,10 +57,62 @@ namespace Utilities.Tests
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                       .SelectMany(str => Option<string>.AsOption(null));
+                                       .SelectMany(str => Option<string>.None);
 
             Assert.AreEqual(Option<string>.None, option);
         }
 
+        [TestMethod]
+        public void TestWhereSomePositive()
+        {
+            var val = "Test";
+            var option = Option<string>.AsOption(val)
+                                    .Where(str => str.StartsWith(val));
+
+            Assert.AreNotEqual(Option<string>.None, option);
+            Assert.AreEqual(val, option.Get());
+        }
+
+        [TestMethod]
+        public void TestWhereSomeNegative()
+        {
+            var val = "Test";
+            var option = Option<string>.AsOption(val)
+                                       .Where(str => str.StartsWith("Wrong"));
+
+            Assert.AreEqual(Option<string>.None, option);
+        }
+
+        [TestMethod]
+        public void TestWhereNone()
+        {
+            var option = Option<string>.None
+                                       .Where(str => str.StartsWith("Wrong"));
+
+            Assert.AreEqual(Option<string>.None, option);
+        }
+
+        [TestMethod]
+        public void TestIterSome()
+        {
+            string valueToSet = "";
+
+            var val = "Test";
+            Option<string>.AsOption(val)
+                          .Iter(i => valueToSet = i);
+
+            Assert.AreEqual(val, valueToSet);
+        }
+
+        [TestMethod]
+        public void TestIterNone()
+        {
+            var val = "";
+            string valueToSet = val;
+            Option<string>.None
+                          .Iter(i => valueToSet = "Test");
+
+            Assert.AreEqual(val, valueToSet);
+        }
     }
 }

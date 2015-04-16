@@ -30,5 +30,14 @@ namespace Utilities.Functional
         {
             return Option<R>.None;
         }
+
+        public override Option<T> Where(Func<T, bool> predicate)
+        {
+            return None;
+        }
+
+        public override void Iter(Action<T> action)
+        {
+        }
     }
 }
