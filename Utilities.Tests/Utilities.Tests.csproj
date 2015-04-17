@@ -68,6 +68,7 @@
     <Compile Include="TestOption.cs" />
     <Compile Include="TestReactiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestResult.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities.Functional\Utilities.Functional.csproj">
