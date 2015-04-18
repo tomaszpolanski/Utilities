@@ -20,5 +20,50 @@ namespace Utilities.Tests
 
             Assert.AreEqual(1, filtered.Count());
         }
+
+        [TestMethod]
+        public void TestTryFindSome()
+        {
+            var val = "Something";
+            List<String> list = new List<string> { val, null };
+
+            var filtered = list.TryFind(current => current == val);
+
+            Assert.IsTrue(filtered.IsSome);
+            Assert.AreEqual(val, filtered.Get());
+        }
+
+        [TestMethod]
+        public void TestTryFindNone()
+        {
+            List<String> list = new List<string> { "Something", null };
+
+             var filtered = list.TryFind(current => current == "Wrong");
+
+            Assert.IsFalse(filtered.IsSome);
+        }
+
+        [TestMethod]
+        public void TestGetSome()
+        {
+            var val = "Something";
+            List<String> list = new List<string> { "Test", val };
+
+            var filtered = list.Get(1);
+
+            Assert.IsTrue(filtered.IsSome);
+            Assert.AreEqual(val, filtered.Get());
+        }
+
+        [TestMethod]
+        public void TestGetNone()
+        {
+            List<String> list = new List<string> { "Test", "Something" };
+
+            var filtered = list.Get(3);
+
+            Assert.IsFalse(filtered.IsSome);
+        }
+
     }
 }

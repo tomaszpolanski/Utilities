@@ -13,5 +13,26 @@ namespace Utilities.Functional
                        .Where(option => option.IsSome)
                        .Select(option => option.Get());
         }
+
+        public static Option<T> TryFind<T>(this IEnumerable<T> self, Func<T, bool> predicate)
+        {
+            var list = self.Where(predicate)
+                           .Take(1)
+                           .ToList();
+
+            return list.Count == 1 ? Option<T>.AsOption(list.FirstOrDefault()) : Option<T>.None;
+        }
+
+        public static Option<T> Get<T>(this IEnumerable<T> self, int index)
+        {
+            try
+            {
+                return Option<T>.AsOption(self.ElementAt(index));
+            }
+            catch
+            {
+                return Option<T>.None;
+            }
+        }
     }
 }
