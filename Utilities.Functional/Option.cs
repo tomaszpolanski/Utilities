@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Utilities.Functional
 {
@@ -23,6 +25,8 @@ namespace Utilities.Functional
         public abstract Option<T> Or(Func<Option<T>> selector);
 
         public abstract Option<R> OfType<R>();
+
+        public abstract IEnumerable<T> ToEnumerable();
 
         public static Option<T> AsOption(T value)
         {

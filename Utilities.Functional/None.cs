@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Utilities.Functional
 {
@@ -60,6 +62,9 @@ namespace Utilities.Functional
             return Option<R>.None;
         }
 
-
+        public override IEnumerable<T> ToEnumerable()
+        {
+            return Enumerable.Empty<T>();
+        }
     }
 }

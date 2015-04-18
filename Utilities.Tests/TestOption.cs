@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Utilities.Functional;
+using System.Linq;
 
 namespace Utilities.Tests
 {
@@ -221,6 +222,24 @@ namespace Utilities.Tests
 
             Assert.AreNotEqual(Option<ICloneable>.None, option);
             Assert.AreEqual(val, option.Get());
+        }
+
+        [TestMethod]
+        public void TestToEnumerableSome()
+        {
+            var sequence = Option<string>.AsOption("Test")
+                                       .ToEnumerable();
+
+            Assert.AreEqual(1, sequence.Count());
+        }
+
+        [TestMethod]
+        public void TestToEnumerableNone()
+        {
+            var sequence = Option<string>.None
+                                         .ToEnumerable();
+
+            Assert.AreEqual(0, sequence.Count());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Utilities.Functional
 {
@@ -56,6 +57,9 @@ namespace Utilities.Functional
             return mValue is R ? new Some<R>((R)(object)mValue) : Option<R>.None; 
         }
 
-
+        public override IEnumerable<T> ToEnumerable()
+        {
+            yield return mValue;
+        }
     }
 }
