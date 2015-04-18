@@ -6,6 +6,12 @@ namespace Utilities.Functional
 {
     public sealed class None<T> : Option<T>
     {
+
+        public override bool IsSome
+        {
+            get { return false; }
+        }
+
         internal None() { }
 
         public override bool Equals(object obj) 

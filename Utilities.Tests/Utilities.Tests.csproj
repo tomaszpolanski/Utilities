@@ -65,6 +65,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="TestLinqExtensions.cs" />
     <Compile Include="TestOption.cs" />
     <Compile Include="TestReactiveExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

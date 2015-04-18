@@ -8,6 +8,8 @@ namespace Utilities.Functional
     {
         public static readonly Option<T> None = new None<T>();
 
+        public abstract bool IsSome { get; }
+
         public abstract Option<R> Select<R>(Func<T, R> selector);
 
         public abstract Option<R> SelectMany<R>(Func<T, Option<R>> selector);

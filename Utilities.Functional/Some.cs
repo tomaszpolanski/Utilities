@@ -7,6 +7,11 @@ namespace Utilities.Functional
     {
         private readonly T mValue;
 
+        public override bool IsSome
+        {
+            get { return true;  }
+        }
+
         internal Some(T value)
         {
             mValue = value;
