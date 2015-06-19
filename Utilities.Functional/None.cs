@@ -72,5 +72,10 @@ namespace Utilities.Functional
         {
             return Enumerable.Empty<T>();
         }
+
+        public override T OrDefault(Func<T> selector)
+        {
+            return selector.Invoke();
+        }
     }
 }

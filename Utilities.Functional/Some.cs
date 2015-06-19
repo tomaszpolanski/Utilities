@@ -5,7 +5,7 @@ namespace Utilities.Functional
 {
     public sealed class Some<T> : Option<T>
     {
-        private readonly T mValue;
+        private readonly T _value;
 
         public override bool IsSome
         {
@@ -14,42 +14,42 @@ namespace Utilities.Functional
 
         internal Some(T value)
         {
-            mValue = value;
+            _value = value;
         }
 
         public override Option<R> SelectMany<R>(Func<T, Option<R>> selector)
         {
-            return selector.Invoke(mValue);
+            return selector.Invoke(_value);
         }
 
         public override T GetUnsafe
         {
-            get { return mValue; }
+            get { return _value; }
         }
 
         public override Option<R> Select<R>(Func<T, R> selector)
         {
-            return Option<R>.AsOption(selector.Invoke(mValue));
+            return Option<R>.AsOption(selector.Invoke(_value));
         }
 
         public override Option<T> Where(Func<T, bool> predicate)
         {
-            return predicate.Invoke(mValue) ? this : None;
+            return predicate.Invoke(_value) ? this : None;
         }
 
         public override void Iter(Action<T> action)
         {
-            action.Invoke(mValue);
+            action.Invoke(_value);
         }
 
         public override R Match<R>(Func<T, R> some, Func<R> none)
         {
-            return some.Invoke(mValue);
+            return some.Invoke(_value);
         }
 
         public override T Or(Func<T> selector)
         {
-            return mValue;
+            return _value;
         }
 
         public override Option<T> Or(Func<Option<T>> selector)
@@ -59,12 +59,17 @@ namespace Utilities.Functional
 
         public override Option<R> OfType<R>()
         {
-            return mValue is R ? Option<R>.AsOption((R)(object)mValue) : Option<R>.None; 
+            return _value is R ? Option<R>.AsOption((R)(object)_value) : Option<R>.None; 
         }
 
         public override IEnumerable<T> ToEnumerable()
         {
-            yield return mValue;
+            yield return _value;
+        }
+
+        public override T OrDefault(Func<T> selector)
+        {
+            return _value;
         }
     }
 }

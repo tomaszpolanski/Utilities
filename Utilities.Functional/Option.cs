@@ -25,6 +25,8 @@ namespace Utilities.Functional
 
         public abstract Option<T> Or(Func<Option<T>> selector);
 
+        public abstract T OrDefault(Func<T> selector);
+
         public abstract Option<R> OfType<R>();
 
         public abstract IEnumerable<T> ToEnumerable();

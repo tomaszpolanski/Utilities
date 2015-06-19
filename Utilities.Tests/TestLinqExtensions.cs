@@ -38,7 +38,7 @@ namespace Utilities.Tests
         {
             List<String> list = new List<string> { "Something", null };
 
-             var filtered = list.TryFind(current => current == "Wrong");
+            var filtered = list.TryFind(current => current == "Wrong");
 
             Assert.IsFalse(filtered.IsSome);
         }
@@ -126,7 +126,6 @@ namespace Utilities.Tests
             .TryAggregate((f, s) => f + s);
             Assert.IsFalse(op.IsSome);
         }
-
 
     }
 }
