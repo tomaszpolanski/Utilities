@@ -38,6 +38,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Failure.cs" />
+    <Compile Include="Fp.cs" />
     <Compile Include="LinqExtensions.cs" />
     <Compile Include="None.cs" />
     <Compile Include="Option.cs" />

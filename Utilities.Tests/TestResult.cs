@@ -142,7 +142,7 @@ namespace Utilities.Tests
         {
             var val = "Test";
             var result = Result<string, string>.AsResult(val, "")
-                                               .Match(success => success, failure => failure);
+                                               .Match(Fp.Id, Fp.Id);
 
             Assert.AreEqual(val, result);
         }
@@ -152,7 +152,7 @@ namespace Utilities.Tests
         {
             var f = "Failed";
             var result = Result<string, string>.AsResult(null, f)
-                                               .Match(success => success, failure => failure);
+                                               .Match(Fp.Id, Fp.Id);
 
             Assert.AreEqual(f, result);
         }

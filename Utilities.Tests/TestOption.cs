@@ -141,7 +141,7 @@ namespace Utilities.Tests
         {
             var val = "Test";
             var result = Option<string>.AsOption(val)
-                                       .Match(some => some, () => string.Empty);
+                                       .Match(Fp.Id, () => string.Empty);
 
             Assert.AreEqual(val, result);
         }
@@ -150,7 +150,7 @@ namespace Utilities.Tests
         public void TestMatchNone()
         {
             var result = Option<string>.None
-                                       .Match(some => some, () => string.Empty);
+                                       .Match(Fp.Id, () => string.Empty);
 
             Assert.AreEqual(string.Empty, result);
         }
