@@ -2,6 +2,7 @@
 using System;
 using Utilities.Functional;
 using System.Linq;
+using System.Reactive;
 
 namespace Utilities.Tests
 {
@@ -12,9 +13,9 @@ namespace Utilities.Tests
         [TestMethod]
         public void TestAsOptionSome()
         {
-            var option = Option<string>.AsOption("");
+            var option = Option<Unit>.AsOption(Unit.Default);
 
-            Assert.AreNotEqual(Option<string>.None, option);
+            Assert.AreNotEqual(Option<Unit>.None, option);
         }
 
         [TestMethod]
