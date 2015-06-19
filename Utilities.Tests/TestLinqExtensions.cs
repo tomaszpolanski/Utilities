@@ -30,7 +30,7 @@ namespace Utilities.Tests
             var filtered = list.TryFind(current => current == val);
 
             Assert.IsTrue(filtered.IsSome);
-            Assert.AreEqual(val, filtered.Get());
+            Assert.AreEqual(val, filtered.GetUnsafe);
         }
 
         [TestMethod]
@@ -49,10 +49,10 @@ namespace Utilities.Tests
             var val = "Something";
             List<String> list = new List<string> { "Test", val };
 
-            var filtered = list.Get(1);
+            var filtered = list.TryElementAt(1);
 
             Assert.IsTrue(filtered.IsSome);
-            Assert.AreEqual(val, filtered.Get());
+            Assert.AreEqual(val, filtered.GetUnsafe);
         }
 
         [TestMethod]
@@ -60,10 +60,73 @@ namespace Utilities.Tests
         {
             List<String> list = new List<string> { "Test", "Something" };
 
-            var filtered = list.Get(3);
+            var filtered = list.TryElementAt(3);
 
             Assert.IsFalse(filtered.IsSome);
         }
+
+        [TestMethod]
+        public void TestTryFirstSuccess()
+        {
+            var op = Enumerable.Range(0, 2)
+            .TryFirst();
+            Assert.IsTrue(op.IsSome);
+            Assert.AreEqual(0, op.GetUnsafe);
+        }
+        [TestMethod]
+        public void TestTryFirstFailure()
+        {
+            var op = Enumerable.Range(0, 0)
+            .TryFirst();
+            Assert.IsFalse(op.IsSome);
+        }
+        [TestMethod]
+        public void TestTryLastSuccess()
+        {
+            var op = Enumerable.Range(0, 2)
+            .TryLast();
+            Assert.IsTrue(op.IsSome);
+            Assert.AreEqual(1, op.GetUnsafe);
+        }
+        [TestMethod]
+        public void TestTryLastFailure()
+        {
+            var op = Enumerable.Range(0, 0)
+            .TryLast();
+            Assert.IsFalse(op.IsSome);
+        }
+        [TestMethod]
+        public void TestTryElementAtSuccess()
+        {
+            var op = Enumerable.Range(0, 10)
+            .TryElementAt(5);
+            Assert.IsTrue(op.IsSome);
+            Assert.AreEqual(5, op.GetUnsafe);
+        }
+        [TestMethod]
+        public void TestTryElementAtFailure()
+        {
+            var op = Enumerable.Range(0, 0)
+            .TryElementAt(5);
+            Assert.IsFalse(op.IsSome);
+        }
+
+        [TestMethod]
+        public void TestTryAggregateSuccess()
+        {
+            var op = Enumerable.Range(0, 10)
+            .TryAggregate((f, s) => f + s);
+            Assert.IsTrue(op.IsSome);
+            Assert.AreEqual(45, op.GetUnsafe);
+        }
+        [TestMethod]
+        public void TestTryAggregateFailure()
+        {
+            var op = Enumerable.Range(0, 0)
+            .TryAggregate((f, s) => f + s);
+            Assert.IsFalse(op.IsSome);
+        }
+
 
     }
 }

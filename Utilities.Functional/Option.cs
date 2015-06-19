@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Utilities.Functional
@@ -10,13 +9,13 @@ namespace Utilities.Functional
 
         public abstract bool IsSome { get; }
 
+        public abstract T GetUnsafe { get; }
+
         public abstract Option<R> Select<R>(Func<T, R> selector);
 
         public abstract Option<R> SelectMany<R>(Func<T, Option<R>> selector);
 
         public abstract Option<T> Where(Func<T, bool> predicate);
-
-        public abstract T Get();
 
         public abstract void Iter(Action<T> action);
 

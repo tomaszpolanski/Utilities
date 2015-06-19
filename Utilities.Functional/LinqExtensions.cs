@@ -11,7 +11,27 @@ namespace Utilities.Functional
         {
             return self.Select(selector)
                        .Where(option => option.IsSome)
-                       .Select(option => option.Get());
+                       .Select(option => option.GetUnsafe);
+        }
+
+        public static Option<T> TryFirst<T>(this IEnumerable<T> self, Func<T, bool> predicate)
+        {
+            return Option<T>.Try(() => self.First(predicate));
+        }
+
+        public static Option<T> TryFirst<T>(this IEnumerable<T> self)
+        {
+            return self.TryFirst(_ => true);
+        }
+
+        public static Option<T> TryLast<T>(this IEnumerable<T> self, Func<T, bool> predicate)
+        {
+            return Option<T>.Try(() => self.Last(predicate));
+        }
+
+        public static Option<T> TryLast<T>(this IEnumerable<T> self)
+        {
+            return self.TryLast(_ => true);
         }
 
         public static Option<T> TryFind<T>(this IEnumerable<T> self, Func<T, bool> predicate)
@@ -23,16 +43,14 @@ namespace Utilities.Functional
             return list.Count == 1 ? Option<T>.AsOption(list.FirstOrDefault()) : Option<T>.None;
         }
 
-        public static Option<T> Get<T>(this IEnumerable<T> self, int index)
+        public static Option<T> TryAggregate<T>(this IEnumerable<T> self, Func<T, T, T> aggregator)
         {
-            try
-            {
-                return Option<T>.AsOption(self.ElementAt(index));
-            }
-            catch
-            {
-                return Option<T>.None;
-            }
+            return Option<T>.Try(() => self.Aggregate(aggregator));
+        }
+
+        public static Option<T> TryElementAt<T>(this IEnumerable<T> self, int index)
+        {
+            return Option<T>.Try(() => self.ElementAt(index));
         }
     }
 }

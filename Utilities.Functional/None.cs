@@ -24,9 +24,9 @@ namespace Utilities.Functional
             return 0;
         }
 
-        public override T Get()
+        public override T GetUnsafe
         {
-            throw new NotSupportedException();
+            get { throw new NotSupportedException(); }
         }
 
         public override Option<R> Select<R>(Func<T, R> selector)

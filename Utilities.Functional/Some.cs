@@ -22,9 +22,9 @@ namespace Utilities.Functional
             return selector.Invoke(mValue);
         }
 
-        public override T Get()
+        public override T GetUnsafe
         {
-            return mValue;
+            get { return mValue; }
         }
 
         public override Option<R> Select<R>(Func<T, R> selector)

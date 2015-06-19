@@ -32,7 +32,7 @@ namespace Utilities.Tests
             var option = Option<string>.AsOption(val)
                                        .Select(str => str.Length);
 
-            Assert.AreEqual(val.Length, option.Get());
+            Assert.AreEqual(val.Length, option.GetUnsafe);
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Utilities.Tests
             var option = Option<string>.AsOption(val)
                                        .SelectMany(str => Option<int>.AsOption(str.Length));
 
-            Assert.AreEqual(val.Length, option.Get());
+            Assert.AreEqual(val.Length, option.GetUnsafe);
         }
 
         [TestMethod]
@@ -72,7 +72,7 @@ namespace Utilities.Tests
                                        .Where(str => str.StartsWith(val));
 
             Assert.AreNotEqual(Option<string>.None, option);
-            Assert.AreEqual(val, option.Get());
+            Assert.AreEqual(val, option.GetUnsafe);
         }
 
         [TestMethod]
@@ -124,7 +124,7 @@ namespace Utilities.Tests
             var option = Option<int>.Try(() => int.Parse("" + number));
 
             Assert.AreNotEqual(Option<string>.None, option);
-            Assert.AreEqual(number, option.Get());
+            Assert.AreEqual(number, option.GetUnsafe);
         }
 
         [TestMethod]
@@ -210,7 +210,7 @@ namespace Utilities.Tests
                                        .Or(() => Option<string>.AsOption("Something"));
 
             Assert.AreNotEqual(Option<ICloneable>.None, option);
-            Assert.AreEqual(val, option.Get());
+            Assert.AreEqual(val, option.GetUnsafe);
         }
 
         [TestMethod]
@@ -221,7 +221,7 @@ namespace Utilities.Tests
                                        .Or(() => Option<string>.AsOption(val));
 
             Assert.AreNotEqual(Option<ICloneable>.None, option);
-            Assert.AreEqual(val, option.Get());
+            Assert.AreEqual(val, option.GetUnsafe);
         }
 
         [TestMethod]
