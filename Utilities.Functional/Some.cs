@@ -29,7 +29,7 @@ namespace Utilities.Functional
 
         public override Option<R> Select<R>(Func<T, R> selector)
         {
-            return new Some<R>(selector.Invoke(mValue));
+            return Option<R>.AsOption(selector.Invoke(mValue));
         }
 
         public override Option<T> Where(Func<T, bool> predicate)
@@ -59,7 +59,7 @@ namespace Utilities.Functional
 
         public override Option<R> OfType<R>()
         {
-            return mValue is R ? new Some<R>((R)(object)mValue) : Option<R>.None; 
+            return mValue is R ? Option<R>.AsOption((R)(object)mValue) : Option<R>.None; 
         }
 
         public override IEnumerable<T> ToEnumerable()
