@@ -242,5 +242,13 @@ namespace Utilities.Tests
 
             Assert.AreEqual(0, sequence.Count());
         }
+
+        [TestMethod]
+        public void TestTryNeverReturnsSomeWithNull()
+        {
+            var op = Option<string>.Try(() => null);
+
+            Assert.IsFalse(op.IsSome);
+        }
     }
 }

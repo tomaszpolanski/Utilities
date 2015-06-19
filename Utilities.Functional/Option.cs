@@ -38,7 +38,7 @@ namespace Utilities.Functional
         {
             try
             {
-                return new Some<T>(selector.Invoke());
+                return AsOption(selector.Invoke());
             }
             catch
             {
