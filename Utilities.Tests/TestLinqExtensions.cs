@@ -123,7 +123,7 @@ namespace Utilities.Tests
         public void TestTryAggregateFailure()
         {
             var op = Enumerable.Range(0, 0)
-            .TryAggregate((f, s) => f + s);
+                               .TryAggregate((f, s) => f + s);
             Assert.IsFalse(op.IsSome);
         }
 

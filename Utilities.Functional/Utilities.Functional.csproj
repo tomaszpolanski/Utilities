@@ -37,11 +37,9 @@
     <Compile Include="Failure.cs" />
     <Compile Include="Fp.cs" />
     <Compile Include="LinqExtensions.cs" />
-    <Compile Include="None.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Result.cs" />
-    <Compile Include="Some.cs" />
     <Compile Include="Success.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />

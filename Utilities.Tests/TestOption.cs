@@ -157,21 +157,21 @@ namespace Utilities.Tests
         }
 
         [TestMethod]
-        public void TestOrSome()
+        public void TestOrDefaultSome()
         {
             var val = "Test";
             var option = Option<string>.AsOption(val)
-                                       .Or(() => "Something");
+                                       .OrDefault(() => "Something");
 
             Assert.AreEqual(val, option);
         }
 
         [TestMethod]
-        public void TestOrNone()
+        public void TestOrDefaultNone()
         {
             var val = "Test";
             var option = Option<string>.None
-                                       .Or(() => val);
+                                       .OrDefault(() => val);
 
             Assert.AreEqual(val, option);
         }
@@ -246,7 +246,7 @@ namespace Utilities.Tests
         [TestMethod]
         public void TestTryNeverReturnsSomeWithNull()
         {
-            var op = Option<string>.Try(() => null);
+            var op = Option<object>.Try(() => (object)null);
 
             Assert.IsFalse(op.IsSome);
         }
